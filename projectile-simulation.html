@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>\lucasflowers - Projectile Simulator</title>
+    <meta property="og:title" content="Lucas Flowers - Projectile Simulator" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {
+        line-height: 1.15;
+      }
+      body {
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+      }
+      p,
+      li,
+      ul,
+      pre,
+      div,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      figure,
+      blockquote,
+      figcaption {
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        background-color: transparent;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: 100%;
+        line-height: 1.15;
+        margin: 0;
+      }
+      button,
+      select {
+        text-transform: none;
+      }
+      button,
+      [type="button"],
+      [type="reset"],
+      [type="submit"] {
+        -webkit-appearance: button;
+      }
+      button::-moz-focus-inner,
+      [type="button"]::-moz-focus-inner,
+      [type="reset"]::-moz-focus-inner,
+      [type="submit"]::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+      button:-moz-focus,
+      [type="button"]:-moz-focus,
+      [type="reset"]:-moz-focus,
+      [type="submit"]:-moz-focus {
+        outline: 1px dotted ButtonText;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+      input {
+        padding: 2px 4px;
+      }
+      img {
+        display: block;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style: normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+      }
+    </style>
+    <link
+      rel="shortcut icon"
+      href="public/image 8@2x1.png"
+      type="icon/png"
+      sizes="32x32"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    
+    <!-- P5.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    
+    <!-- Custom styles for the simulator -->
+    <style>
+      #canvas-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 20px 0;
+      }
+      .sim-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .description {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        font-family: 'Red Hat Mono', monospace;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="component1-container">
+        <img
+          alt="image"
+          src="public/image%208%402x-200h.png"
+          class="component1-image"
+        />
+        <span class="component1-text">
+          <span>C:\WINDOWS\system32\cmd.exe</span>
+        </span>
+        <img
+          alt="image"
+          src="public/mask%20group%20(2)-200h.png"
+          class="component1-image1"
+        />
+      </div>
+      <div class="home-container1">
+        <span class="home-text">
+          <span>C:\Users\lucas&gt; ./projectile-simulator.exe</span>
+          <br />
+          <br />
+        </span>
+      </div>
+      
+      <div class="home-container2">
+        <a href="index.html" class="home-navlink">
+          <span>&nbsp; &nbsp; &lt;</span>
+          <span>HOME </span>
+          <span>&gt;</span>
+        </a>
+        <a href="about.html" class="home-navlink">
+          <span>&nbsp; &nbsp; &lt;</span>
+          <span>ABOUT </span>
+          <span>&gt;</span>
+        </a>
+        <a href="projects.html" class="home-navlink1">
+          &nbsp; &nbsp; &lt; PROJECTS &gt;
+        </a>
+      </div>
+      
+      <div class="home-container3">
+        <h2 class="sim-title">Physics Projectile Simulator</h2>
+        <div class="description">
+          <p>
+            This interactive physics simulator allows you to experiment with projectile motion.
+            <br><br>
+            <strong>Instructions:</strong>
+            <ul>
+              <li>Click and drag the white circle to aim and set force</li>
+              <li>Click anywhere else to launch a projectile</li>
+              <li>Use the sliders to adjust height and mass</li>
+              <li>Hover over a projectile to see its details</li>
+              <li>Click "Clear" to reset the simulation</li>
+            </ul>
+          </p>
+        </div>
+        <div id="canvas-container"></div>
+      </div>
+      
+      <div class="app-component-container app-component-root-class-name2">
+        <a
+          href="mailto:contact@lucasflowers.net?subject="
+          class="app-component-link"
+          target="_blank"
+        >
+          <span class="app-component-text">&nbsp; &nbsp;</span>
+          <br class="app-component-text01" />
+          <span class="app-component-text02">&nbsp; &nbsp; [ EMAIL ]</span>
+          <br />
+          <br />
+        </a>
+        <a
+          href="https://github.com/lflowers01"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="app-component-link1"
+        >
+          <span class="app-component-text05">&nbsp; &nbsp;</span>
+          <br class="app-component-text06" />
+          <span class="app-component-text07">&nbsp; &nbsp; [ GITHUB ]</span>
+          <br />
+          <br />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/lucas-flowers-57109a288/"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="app-component-link2"
+        >
+          <span class="app-component-text10">&nbsp; &nbsp;</span>
+          <br class="app-component-text11" />
+          <span class="app-component-text12">&nbsp; &nbsp; [ LINKEDIN ]</span>
+          <br />
+          <br />
+        </a>
+      </div>
+    </div>
+    
+    <!-- Projectile Simulator Script -->
+    <script>
+      // Define global constants and variables
+      const grav = 9.81;
+      const scale = 15;
+      let heightSlider, massSlider;
+      let clearButton;
+      let heightValue, massValue;
+
+      const sketch = (p) => {
+        class Ray {
+          constructor(x, y, vx, vy, color) {
+            this.x = x;
+            this.y = y; 
+            this.vx = vx;
+            this.vy = vy;
+            this.color = color;
+          }
+        
+          update() {
+            p.push();
+            p.stroke(this.color);
+            p.strokeWeight(2);
+            p.line(this.x, this.y, this.x + this.vx, this.y + this.vy);
+            p.pop();
+          }
+        }
+
+        class Aimer {
+          constructor(x, y, angle, force) {
+            this.x = x;
+            this.y = y;
+            this.angle = angle;
+            this.force = force;
+            this.ray = new Ray(this.x, this.y, Math.cos(this.angle) * this.force, Math.sin(this.angle) * this.force, "yellow");
+            this.dragging = false;
+            this.dragX = this.x + Math.cos(this.angle) * this.force * 10;
+            this.dragY = this.y + Math.sin(this.angle) * this.force * 10;
+            this.old_angle = this.angle;
+          }
+        
+          update(cannon) {
+            this.x = cannon.x + Math.cos(this.angle);
+            this.y = cannon.y + 10 + Math.sin(this.angle);
+        
+            if (!this.dragging) {
+              this.dragX = this.x + Math.cos(this.angle) * this.force * scale;
+              this.dragY = this.y + Math.sin(this.angle) * this.force * scale;
+            } else {
+              this.angle = Math.atan2(this.dragY - this.y, this.dragX - this.x);
+              this.force = p.dist(this.x, this.y, this.dragX, this.dragY) / scale;
+            }
+
+            if (this.angle * (180 / -Math.PI) > 90) {
+              this.angle = 90 * (-Math.PI / 180);
+            } else if (this.angle * (180 / -Math.PI) < -90) {
+              this.angle = -90 * (-Math.PI / 180);
+            } else {
+              this.old_angle = this.angle;
+            }
+            
+            if (this.dragX < 0) this.dragX = 0;
+            if (this.dragX > p.width) this.dragX = p.width;
+            if (this.dragY < 0) this.dragY = 0;
+            if (this.dragY > p.height) this.dragY = p.height;
+        
+            this.ray.vx = Math.cos(this.angle) * this.force * scale;
+            this.ray.vy = Math.sin(this.angle) * this.force * scale;
+            this.ray.x = this.x;
+            this.ray.y = this.y;
+        
+            this.ray.update();
+        
+            p.fill(255);
+            p.stroke(0);
+            p.strokeWeight(1);
+            p.ellipse(this.dragX, this.dragY, 10);
+          }
+        
+          isMouseOver() {
+            return p.dist(p.mouseX, p.mouseY, this.dragX, this.dragY) < 10;
+          }
+        }
+
+        class Projectile {
+          constructor(x, y, angle, force, radius) {
+            this.x = x;
+            this.y = y;
+            this.startX = x;
+            this.initialVel = (force / radius) * 10;
+            this.initialForce = force; 
+            this.x_velocity = Math.cos(angle) * this.initialVel;
+            this.y_velocity = Math.sin(angle) * -this.initialVel;
+            this.radius = radius;
+            this.initialAngle = angle;
+            this.mass = radius;
+            this.trajectory = [];
+            p.colorMode(p.HSB, 360, 100, 100);
+            this.color = p.color(p.random(360), 100, 100);
+            p.colorMode(p.RGB, 255, 255, 255);
+
+            this.x_component = new Ray(this.x, this.y, this.x_velocity / scale, 0, 'green');
+            this.y_component = new Ray(this.x, this.y, 0, -this.y_velocity / scale, 'blue');
+
+            this.trajectory = [];
+          }
+
+          update() {
+            const timeStep = p.deltaTime / 1000;
+
+            this.y_velocity -= grav * timeStep;
+            this.x += this.x_velocity * timeStep * 100;
+            this.y -= this.y_velocity * timeStep * 100;
+
+            if (this.y + this.radius >= p.height) {
+              this.y = p.height - this.radius;
+              this.y_velocity = 0;
+              this.x_velocity = 0;
+            }
+
+            p.fill(this.color);
+            p.noStroke();
+            p.ellipse(this.x, this.y, this.radius * 2);
+
+            this.x_component.x = this.x;
+            this.x_component.y = this.y;
+            this.x_component.vx = this.x_velocity * 5;
+            this.x_component.vy = 0;
+            this.x_component.update();
+
+            this.y_component.x = this.x;
+            this.y_component.y = this.y;
+            this.y_component.vx = 0;
+            this.y_component.vy = -this.y_velocity * 5;
+            this.y_component.update();
+
+            this.trajectory.push({ x: this.x, y: this.y });
+
+            p.stroke(255);
+            p.strokeWeight(1);
+            for (let i = 1; i < this.trajectory.length; i++) {
+              const prev = this.trajectory[i - 1];
+              const curr = this.trajectory[i];
+              p.line(prev.x, prev.y, curr.x, curr.y);
+            }
+
+            if (p.dist(p.mouseX, p.mouseY, this.x, this.y) < this.radius) {
+              const displacement = Math.abs(this.x - this.startX);
+              p.fill(0);
+              p.textSize(12);
+              p.text(
+                `Δx: ${(displacement / 10).toFixed(2)} m\n` +
+                `Initial Force: ${this.initialForce.toFixed(1)} N\n` +
+                `Launch Angle: ${(this.initialAngle * (180 / -Math.PI)).toFixed(1)}°\n` +
+                `Mass: ${this.mass.toFixed(1)} kg\n` +
+                `Initial Velocity: ${this.initialVel.toFixed(1)} m/s`,
+                this.x - 50,
+                this.y - this.radius - 50
+              );
+            }
+          }
+
+          isOffScreen() {
+            return this.x < 0 || this.x > p.width;
+          }
+        }
+
+        class Cannon {
+          constructor(x, y, angle, launch) {
+            this.x = x;
+            this.y = y;
+            this.angle = angle;
+            this.launch = launch;
+          }
+       
+          update() {
+            p.push();
+            p.translate(this.x, this.y + 10);
+            p.rotate(this.angle);
+            p.fill(50);
+            p.noStroke();
+            p.rect(0, -10, 50, 20);
+            p.pop();
+            aimer.update(this);
+          }
+        }
+
+        let projectiles = [];
+        let cannon = new Cannon(25, 500, 0, 0);
+        let aimer = new Aimer(25, 500, 0, 10);
+
+        p.setup = () => {
+          // Create canvas inside the designated container
+          let canvas = p.createCanvas(800, 600);
+          canvas.parent('canvas-container');
+          
+          p.background(220);
+          
+          heightSlider = p.createSlider(50, p.height - 15, (p.height - 15) * 0.75, 10);
+          heightSlider.position(10, 40);
+          heightSlider.style('width', '200px');
+          p.createDiv('Launch Height').position(220, 35);
+
+          massSlider = p.createSlider(5, 20, 10, 1);
+          massSlider.position(10, 70);
+          massSlider.style('width', '200px');
+          p.createDiv('Mass').position(220, 65);
+
+          clearButton = p.createButton('Clear');
+          clearButton.position(10, 100);
+          clearButton.mousePressed(() => {
+            projectiles = [];
+          });
+
+          heightValue = p.createDiv(`Height: ${heightSlider.value()/10} m`);
+          heightValue.position(350, 35);
+
+          massValue = p.createDiv(`Mass: ${massSlider.value()} kg`);
+          massValue.position(350, 65);
+        };
+
+        p.draw = () => {
+          p.background(200);
+
+          heightValue.html(`${(p.height - heightSlider.value()) / 10} m`);
+          massValue.html(`${massSlider.value()} kg`);
+
+          p.fill(0);
+          p.textSize(16);
+          p.text(`Force: ${aimer.force.toFixed(1)} N`, p.width - 200, 20);
+          p.text(`Angle: ${(aimer.angle * (180 / -Math.PI)).toFixed(0)}°`, p.width - 200, 40);
+
+          cannon.y = heightSlider.value();
+          cannon.angle = aimer.angle;
+
+          for (let i = 0; i < projectiles.length; i++) {
+            projectiles[i].update();
+            if (projectiles[i].isOffScreen()) {
+              projectiles.splice(i, 1);
+            }
+          }
+          
+          cannon.update();
+        };
+
+        p.mousePressed = () => {
+          if (
+            clearButton.elt.contains(document.elementFromPoint(p.mouseX, p.mouseY)) ||
+            heightSlider.elt.contains(document.elementFromPoint(p.mouseX, p.mouseY)) ||
+            massSlider.elt.contains(document.elementFromPoint(p.mouseX, p.mouseY))
+          ) {
+            return;
+          }
+
+          if (aimer.isMouseOver()) {
+            aimer.dragging = true;
+          } else {
+            const force = aimer.force;
+            const radius = massSlider.value();
+
+            if (projectiles.length >= 15) {
+              projectiles.shift();
+            }
+
+            projectiles.push(new Projectile(aimer.x, aimer.y, aimer.angle, force, radius));
+          }
+        };
+
+        p.mouseDragged = () => {
+          if (aimer.dragging) {
+            aimer.dragX = p.mouseX;
+            aimer.dragY = p.mouseY;
+          }
+        };
+
+        p.mouseReleased = () => {
+          aimer.dragging = false;
+        };
+      };
+
+      // Initialize the P5 sketch
+      new p5(sketch);
+    </script>
+  </body>
+</html>
